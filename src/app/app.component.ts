@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostBinding } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 
 @Component({
@@ -6,8 +6,10 @@ import { RouterOutlet } from "@angular/router";
     standalone: true,
     imports: [RouterOutlet],
     templateUrl: "./app.component.html",
-    styleUrl: "./app.component.scss"
+    styleUrl: "./app.component.scss",
 })
 export class AppComponent {
-    title = "atom-challenge-fe-template";
+    //! remover este hostBinding
+    @HostBinding("style") className = "width: 100vw; height: 100vh; display: flex";
+    title = "Ariel Del Grande Test";
 }
