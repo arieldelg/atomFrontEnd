@@ -15,17 +15,3 @@ $breakpoints: (
     }
   }
 }
-
-// Example usage
-.container {
-  width: 100%;
-  padding: 20px;
-
-  @include respond(md) {
-    padding: 10px;
-  }
-
-  @include respond(sm) {
-    padding: 5px;
-  }
-}

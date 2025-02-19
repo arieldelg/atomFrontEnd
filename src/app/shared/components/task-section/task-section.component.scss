@@ -1,6 +1,15 @@
-:host{
+@import "../../../app.component.scss";
+
+:host {
   display: flex;
   height: calc(100vh - 107px);
+}
+
+@include respond(sm) {
+  aside {
+    display: none;
+  }
+
 }
 
 aside {

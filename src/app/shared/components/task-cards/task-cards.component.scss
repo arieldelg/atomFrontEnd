@@ -1,3 +1,4 @@
+@import "../../../app.component.scss";
 :host{
   width: 100%;
   height: max-content;
@@ -22,6 +23,20 @@
   appearance: none;
 }
 
+@include respond(sm) {
+  :host {
+    flex-direction: column;
+  }
+  aside {
+    display: none;
+  }
+  .container-date-title {
+    h2 {
+      font-size: x-small;
+    }
+  }
+}
+
 
 .left-div {
   display: flex;
@@ -31,7 +46,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 28px;
       h1 {
         font-size: larger;
       }

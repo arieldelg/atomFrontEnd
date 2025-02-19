@@ -1,7 +1,7 @@
 <div class="left-div">
   <div class="container-date-title">
     <h1>{{task.title| titlecase}}</h1>
-    <h2>{{task.createdAt| date: "EEEE, MMMM d, y, h:mm: a"}}</h2>
+    <h2>{{task.createdAt| date: "M/d/yy, h:mm a"}}</h2>
   </div>
   <p>{{(task.description.length>100)? (task.description | slice:0:100)+'...':(task.description)}}</p>
 </div>
