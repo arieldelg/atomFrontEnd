@@ -1,0 +1,31 @@
+// Define breakpoints
+$breakpoints: (
+  "xs": 320px,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px
+);
+
+// Mixin for media queries
+@mixin respond($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// Example usage
+.container {
+  width: 100%;
+  padding: 20px;
+
+  @include respond(md) {
+    padding: 10px;
+  }
+
+  @include respond(sm) {
+    padding: 5px;
+  }
+}

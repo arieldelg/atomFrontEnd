@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+<mat-dialog-content class="mat-typography">
+  <h1 class="title">Nueva Tarea</h1>
+  <div class="addTask">
+    <p class="container-input">
+      <mat-form-field appearance="fill" class="input-mat">
+        <mat-label>Titulo</mat-label>
+        <input matInput placeholder="Titulo de la Tarea" formControlName="title" />
+
+      </mat-form-field>
+      <span class="warning-text" *ngIf="isValidForm('title')" >
+        titulo es requerido
+      </span>
+    </p>
+
+    <p class="container-input">
+      <mat-form-field appearance="fill" class="input-mat">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description" ></textarea>
+
+      </mat-form-field >
+      <span class="warning-text" *ngIf="isValidForm('description')">
+        Descripción es requerido
+      </span>
+    </p>
+  </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" class="buttons">
+    <button mat-button mat-dialog-close class="cancelar">Cancelar</button>
+    <button mat-button cdkFocusInitial type="submit" (keydown.enter)="onSubmit()">Agregar</button>
+  </mat-dialog-actions>
+</form>

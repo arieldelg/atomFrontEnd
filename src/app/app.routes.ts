@@ -7,7 +7,11 @@ export const routes: Routes = [
         pathMatch: "full"
     },
     {
+        path: "tasks",
+        loadComponent: () => import("./tasks/tasks.component").then((m) => m.TasksComponent)
+    },
+    {
         path: "home",
-        loadComponent: () => import("./modules/login/login.component").then((m) => m.LoginComponent)
-    }
+        loadComponent: () => import("./auth/login/login.component").then((m) => m.LoginComponent)
+    },
 ];

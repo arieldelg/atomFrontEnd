@@ -1,11 +1,15 @@
 @import "assets/styles/theme";
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 html,
 body {
   height: 100%;
   width: 100%;
 }
 body {
-  margin: 0;
   font-family: Inter, "Helvetica Neue", sans-serif;
 }

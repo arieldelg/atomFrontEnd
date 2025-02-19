@@ -1,0 +1,53 @@
+:host{
+  display: flex;
+  height: calc(100vh - 107px);
+}
+
+aside {
+  width: 200px;
+  padding-top: 28px;
+  border-right: 1px solid rgba(0, 0, 0, 0.436);
+   div {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      font-size: larger;
+      font-weight: bold;
+      padding: 0 18px;
+      color: rgba(0, 0, 0, 0.77);
+   }
+    div:hover {
+    background-color: rgba(0, 0, 0, 0.238);
+    color: white;
+    cursor: pointer;
+   }
+}
+
+section {
+  padding: 28px 28px 0 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  .header-task{
+    display: flex;
+    justify-content: space-between;
+    button {
+      background-color: rgba(0, 128, 0, 0.653);
+    }
+  }
+  .overflow-container {
+    overflow: scroll;
+    height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    .cards-container {
+      width: 100%;
+      margin: 20px 0;
+    }
+  }
+}
+
+.overflow-container::-webkit-scrollbar {
+  display: none;
+}

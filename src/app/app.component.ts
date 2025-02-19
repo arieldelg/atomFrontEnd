@@ -1,4 +1,4 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 
 @Component({
@@ -9,7 +9,5 @@ import { RouterOutlet } from "@angular/router";
     styleUrl: "./app.component.scss",
 })
 export class AppComponent {
-    //! remover este hostBinding
-    @HostBinding("style") className = "width: 100vw; height: 100vh; display: flex";
     title = "Ariel Del Grande Test";
 }

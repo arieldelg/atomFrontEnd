@@ -1,0 +1,49 @@
+<div class="login-page" *ngIf="view">
+  <div class="left-container">
+    <h1>Hello!!</h1>
+    <div class="text-container">
+      <p>Here you can find my links to the Backend repository</p>
+      <a href="https://github.com/arieldelg/atomBackend">click here</a>
+      <p>Here you can find my links to the FrontEnd repository</p>
+      <a href="https://github.com/arieldelg/atomBackend">click here</a>
+    </div>
+  </div>
+  <div class="right-container">
+    <h1>Login</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>user</mat-label>
+          <input matInput placeholder="Your userName" formControlName="displayName" />
+          <mat-icon matSuffix>face</mat-icon>
+        </mat-form-field>
+        <span class="warning-text" *ngIf="isValidForm('displayName')" >
+          usuario debe ser minimo de 4 characteres
+        </span>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>email</mat-label>
+          <input matInput placeholder="example@hotmail.com" formControlName="email" />
+          <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+        <span class="warning-text" *ngIf="isValidForm('email')">
+          correo no valido
+        </span>
+      </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>password</mat-label>
+          <input matInput type="password" placeholder="********" formControlName="password" />
+          <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+        <span class="warning-text" *ngIf="isValidForm('password')">
+          La contraseña debe de ser mayor de 6 caracteres.
+        </span>
+      </p>
+      <button type="submit" (keydown.enter)="onSubmit()" mat-raised-button>
+        Login
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+:host{
+  width: 100%;
+  height: max-content;
+  background-color: rgba(152, 152, 152, 0.797);
+  border-radius: 10px;
+  border: 1px solid rgba(152, 152, 152, 0.797);
+  box-shadow: 0px 0px 5px 5px rgb(0 0 0 / 10%);
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin unbuttonize {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
+  font: inherit;
+  border-radius: 0;
+  appearance: none;
+}
+
+
+.left-div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  .container-date-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+      h1 {
+        font-size: larger;
+      }
+      h2{
+        font-size: smaller;
+        color: rgba(0, 0, 0, 0.753);
+      }
+  }
+}
+
+.right-div {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: center;
+  .action-button {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    @include unbuttonize
+  }
+
+  .delete-button:hover {
+    background-color: rgba(216, 24, 24, 0.599);
+    border-radius: 50%;
+    color: white;
+  }
+
+  .complete-button {
+    background-color: rgba(15, 200, 15, 0.719);
+    border-radius: 50%;
+    color: white;
+  }
+
+  .un-complete-button {
+    background-color: unset;
+    color: black;
+  }
+
+
+  .pending-button {
+    background-color: rgba(233, 233, 28, 0.708);
+    border-radius: 50%;
+    color: white;
+  }
+
+  .un-pending-button {
+    background-color: unset;
+    color: black;
+  }
+}
+
