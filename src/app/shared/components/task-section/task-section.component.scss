@@ -51,7 +51,7 @@ section {
     -ms-overflow-style: none;
     scrollbar-width: none;
     .cards-container {
-      width: 100%;
+      max-width: 1100px;
       margin: 20px 0;
     }
   }

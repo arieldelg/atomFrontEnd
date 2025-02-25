@@ -9,7 +9,11 @@
 
       </mat-form-field>
       <span class="warning-text" *ngIf="isValidForm('title')" >
-        titulo es requerido
+        @if (form.controls['title'].hasError("maxlength")) {
+          titulo debe ser menor a 50 characteres actualmente tiene {{form.controls['title'].value.length}}
+        } @else {
+          titulo es requerido
+        }
       </span>
     </p>
 

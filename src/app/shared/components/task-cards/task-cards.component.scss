@@ -1,6 +1,6 @@
 @import "../../../app.component.scss";
 :host{
-  width: 100%;
+  max-width: 100%;
   height: max-content;
   background-color: rgba(152, 152, 152, 0.797);
   border-radius: 10px;
@@ -35,10 +35,12 @@
       font-size: x-small;
     }
   }
+
 }
 
 
 .left-div {
+  max-width: 75%;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -47,7 +49,10 @@
     flex-direction: row;
     align-items: center;
     gap: 28px;
+    width: 100%;
       h1 {
+        width: 50%;
+        word-wrap: break-word;
         font-size: larger;
       }
       h2{
@@ -55,13 +60,17 @@
         color: rgba(0, 0, 0, 0.753);
       }
   }
+  p {
+    word-wrap: break-word;
+    width: 100%;
+  }
 }
 
 .right-div {
   height: 50px;
   display: flex;
   flex-direction: row;
-  gap: 28px;
+  gap: 10px;
   align-items: center;
   .action-button {
     height: 50px;

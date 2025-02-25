@@ -18,8 +18,12 @@ import { ValidatorsService } from "../../../core/services/validators.service";
 })
 export class NewTaskComponent {
     public form: FormGroup = new FormGroup({
-        title: new FormControl("", Validators.required),
-        description: new FormControl("", Validators.required),
+        title: new FormControl("", [
+            Validators.required,
+            ValidatorsService.noWhiteSpaceValue,
+            Validators.maxLength(50)
+        ]),
+        description: new FormControl("", [Validators.required, ValidatorsService.noWhiteSpaceValue]),
         completed: new FormControl(false, Validators.required),
         createdAt: new FormControl(new Date(), Validators.required),
     });
@@ -35,6 +39,7 @@ export class NewTaskComponent {
 
     public onSubmit() {
         const task = this.form;
+
         if (task.invalid) {
             task.markAllAsTouched();
             return;
