@@ -21,4 +21,6 @@ export class ValidatorsService {
 
         return isWhiteSpace ? { whiteSpace: true } : null;
     };
+
+    //* here i add a validator for a whiteSpace
 }
