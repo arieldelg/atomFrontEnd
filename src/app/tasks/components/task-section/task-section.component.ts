@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  input,
-  OnDestroy,
-  OnInit,
-  output,
-} from '@angular/core';
+import { Component, computed, input, OnDestroy, output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 import {

@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  signal,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularMaterialModule, Task } from '../../core';
