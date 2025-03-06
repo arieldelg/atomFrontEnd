@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { catchError, from, map, mergeMap, Observable, of } from 'rxjs';
 import {
   Auth,
@@ -18,7 +18,6 @@ export class AuthService {
   public loading = signal<boolean>(false);
 
   public holdErrorCredentials = signal<string>('');
-
   public holdUser = signal<UserCred>({
     email: '',
     displayName: '',

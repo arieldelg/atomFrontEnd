@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -22,8 +22,9 @@ import { AuthService } from '../../services/auth-service.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public error: boolean = false;
+  public message = signal<string>('');
   public credentialError = signal<string>('');
   public form: FormGroup = new FormGroup({
     email: new FormControl('', [
@@ -42,9 +43,8 @@ export class LoginComponent {
     private readonly modalService: ModalService,
     private readonly route: Router
   ) {}
-
-  get message() {
-    return this.authService.holdErrorCredentials();
+  ngOnInit(): void {
+    this.message.set(this.authService.holdErrorCredentials());
   }
 
   public isValidForm(value: string) {
@@ -65,10 +65,10 @@ export class LoginComponent {
         this.authService.login().subscribe(({ message }) => {
           if (message === 'Invalid Credentials') {
             this.authService.holdErrorCredentials.set('Invalid Credentials');
-            return;
+          } else {
+            this.authService.holdErrorCredentials.set('');
+            this.route.navigate(['tasks']);
           }
-          this.authService.holdErrorCredentials.set('');
-          this.route.navigate(['tasks']);
         });
         return;
       }

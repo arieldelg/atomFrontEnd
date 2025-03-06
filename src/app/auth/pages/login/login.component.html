@@ -11,8 +11,8 @@
   <div class="right-container">
     <h1>Login</h1>
 
-    @if (message.length > 0) {
-    <p class="text-invalid">{{ message }}</p>
+    @if (message().length > 0) {
+    <p class="text-invalid">{{ message() }}</p>
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
