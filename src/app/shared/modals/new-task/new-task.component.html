@@ -1,36 +1,44 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" >
-<mat-dialog-content class="mat-typography">
-  <h1 class="title">Nueva Tarea</h1>
-  <div class="addTask">
-    <p class="container-input">
-      <mat-form-field appearance="fill" class="input-mat">
-        <mat-label>Titulo</mat-label>
-        <input matInput placeholder="Titulo de la Tarea" formControlName="title" />
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <h1 class="title">New Task</h1>
+    <div class="addTask">
+      <p class="container-input">
+        <mat-form-field appearance="fill" class="input-mat">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            placeholder="Titulo de la Tarea"
+            formControlName="title"
+          />
+        </mat-form-field>
+        <span class="warning-text" *ngIf="isValidForm('title')">
+          @if (form.controls['title'].hasError("maxlength")) { title has to be
+          at least 50 characters
+          {{ form.controls["title"].value.length }}
+          } @else { titulo es requerido }
+        </span>
+      </p>
 
-      </mat-form-field>
-      <span class="warning-text" *ngIf="isValidForm('title')" >
-        @if (form.controls['title'].hasError("maxlength")) {
-          titulo debe ser menor a 50 characteres actualmente tiene {{form.controls['title'].value.length}}
-        } @else {
-          titulo es requerido
-        }
-      </span>
-    </p>
-
-    <p class="container-input">
-      <mat-form-field appearance="fill" class="input-mat">
-        <mat-label>Descripción</mat-label>
-        <textarea matInput formControlName="description" ></textarea>
-
-      </mat-form-field >
-      <span class="warning-text" *ngIf="isValidForm('description')">
-        Descripción es requerido
-      </span>
-    </p>
-  </div>
+      <p class="container-input">
+        <mat-form-field appearance="fill" class="input-mat">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <span class="warning-text" *ngIf="isValidForm('description')">
+          Description is required
+        </span>
+      </p>
+    </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end" class="buttons">
-    <button mat-button mat-dialog-close class="cancelar">Cancelar</button>
-    <button mat-button cdkFocusInitial type="submit" (keydown.enter)="onSubmit()">Agregar</button>
+    <button
+      mat-button
+      mat-dialog-close
+      class="cancelar"
+      (click)="handleResetForm(false)"
+    >
+      Cancelar
+    </button>
+    <button mat-button cdkFocusInitial type="submit">Agregar</button>
   </mat-dialog-actions>
 </form>

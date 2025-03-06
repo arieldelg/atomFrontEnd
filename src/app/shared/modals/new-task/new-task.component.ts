@@ -1,55 +1,70 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy } from '@angular/core';
 import {
-    FormControl, FormGroup, ReactiveFormsModule, Validators
-} from "@angular/forms";
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
-import { AngularMaterialModule } from "../../../core";
-import { ModalService } from "../../../core/services/modal.service";
-import { TaskService } from "../../../core/services/task-service.service";
-import { ValidatorsService } from "../../../core/services/validators.service";
+import { AngularMaterialModule } from '../../../core';
+import { ModalService } from '../../services/modal.service';
+import { TaskService } from '../../../tasks/services/task-service.service';
+import { ValidatorsService } from '../../services/validators.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-    selector: "app-new-task",
-    standalone: true,
-    imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule],
-    templateUrl: "./new-task.component.html",
-    styleUrl: "./new-task.component.scss"
+  selector: 'app-new-task',
+  standalone: true,
+  imports: [CommonModule, AngularMaterialModule, ReactiveFormsModule],
+  templateUrl: './new-task.component.html',
+  styleUrl: './new-task.component.scss',
 })
-export class NewTaskComponent {
-    public form: FormGroup = new FormGroup({
-        title: new FormControl("", [
-            Validators.required,
-            ValidatorsService.noWhiteSpaceValue,
-            Validators.maxLength(50)
-        ]),
-        description: new FormControl("", [Validators.required, ValidatorsService.noWhiteSpaceValue]),
-        completed: new FormControl(false, Validators.required),
-        createdAt: new FormControl(new Date(), Validators.required),
-    });
+export class NewTaskComponent implements OnDestroy {
+  public destroy$ = new Subject<void>();
+  public form: FormGroup = new FormGroup({
+    title: new FormControl('', [
+      Validators.required,
+      ValidatorsService.noWhiteSpaceValue,
+      Validators.maxLength(50),
+    ]),
+    description: new FormControl('', [
+      Validators.required,
+      ValidatorsService.noWhiteSpaceValue,
+    ]),
+    completed: new FormControl(false, Validators.required),
+    createdAt: new FormControl(new Date(), Validators.required),
+  });
 
-    constructor(
-        private readonly modal: ModalService,
-        private readonly taskService: TaskService
-    ) {}
+  constructor(
+    private readonly modal: ModalService,
+    private readonly taskService: TaskService
+  ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-    public isValidForm(value: string) {
-        return ValidatorsService.isValidForm(value, this.form);
+  public handleResetForm(cancel: boolean) {
+    this.modal.dialogStatus.set(cancel);
+  }
+
+  public isValidForm(value: string) {
+    return ValidatorsService.isValidForm(value, this.form);
+  }
+
+  public onSubmit() {
+    const task = this.form;
+
+    if (task.invalid) {
+      task.markAllAsTouched();
+      return;
     }
 
-    public onSubmit() {
-        const task = this.form;
-
-        if (task.invalid) {
-            task.markAllAsTouched();
-            return;
-        }
-        this.taskService.addTask(task.value).subscribe(
-            (resp) => {
-                if (!resp.uid) throw new Error("Something went wrong");
-                task.reset();
-                this.modal.dialog.getDialogById("newTask")?.close();
-            }
-        );
-    }
+    this.taskService.form.set(this.form.value);
+    this.taskService.isLoadingTask.set(true);
+    this.modal.dialogStatus.set(true);
+    this.form.reset();
+    this.modal.dialog.getDialogById('newTask')!.close();
+  }
 }

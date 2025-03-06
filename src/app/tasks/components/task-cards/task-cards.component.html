@@ -1,0 +1,52 @@
+<div class="left-div">
+  <div class="container-date-title">
+    <h1>{{ task().title | titlecase }}</h1>
+    <h2>{{ task().createdAt | date : "M/d/yy, h:mm a" }}</h2>
+  </div>
+  <p>
+    {{
+      task().description.length > 100
+        ? (task().description | slice : 0 : 100) + "..."
+        : task().description
+    }}
+  </p>
+</div>
+<div class="right-div">
+  @if (loading()) {
+
+  <div
+    class="text-xs font-medium text-center text-blue-800 bg-blue-200 rounded-full animate-pulse dark:bg-blue-900 dark:text-blue-200 w-20 h-6 flex flex-row items-center justify-center"
+  >
+    <p>loading...</p>
+  </div>
+
+  } @else {
+  <button
+    [disabled]="loading()"
+    class="action-button"
+    [ngClass]="{
+        'complete-button': task().completed,
+        'un-complete-button': !task().completed,
+      }"
+    (click)="updateTask()"
+    #clickValor
+  >
+    <mat-icon matSuffix>check_circle</mat-icon>
+  </button>
+  <button
+    [disabled]="loading()"
+    class="action-button"
+    [ngClass]="{
+      'pending-button': !task().completed,
+      'un-pending-button': task().completed
+    }"
+    (click)="updateTask()"
+  >
+    <mat-icon matSuffix>pending_actions</mat-icon>
+  </button>
+
+  }
+  <button class="delete-button action-button" (click)="deleteTask(task().id!)">
+    <mat-icon matSuffix>delete</mat-icon>
+  </button>
+</div>

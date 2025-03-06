@@ -1,0 +1,7 @@
+<section class="layout">
+  <app-header [userName]="user()" (logOut)="logout()" />
+
+  <section>
+    <app-task-section [taskList]="task()" (trigger)="triggerTask()" />
+  </section>
+</section>

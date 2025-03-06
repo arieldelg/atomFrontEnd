@@ -1,23 +1,27 @@
-import { CommonModule } from "@angular/common";
-import { Component, inject } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
-import { AngularMaterialModule } from "../../../core";
-import { ModalService } from "../../../core/services/modal.service";
+import { AngularMaterialModule } from '../../../core';
+import { ModalService } from '../../services/modal.service';
+import { AuthService } from '../../../auth/services/auth-service.service';
 
 @Component({
-    selector: "app-confirmation",
-    standalone: true,
-    imports: [CommonModule, AngularMaterialModule],
-    templateUrl: "./confirmationUser.component.html",
-    styles: "",
+  selector: 'app-confirmation',
+  standalone: true,
+  imports: [CommonModule, AngularMaterialModule],
+  templateUrl: './confirmationUser.component.html',
+  styles: '',
 })
 export class ConfirmationComponent {
-    public readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
-    constructor(private readonly modal: ModalService) {}
-    handleResetForm(value: boolean) {
-        this.modal.modal$.emit({
-            confirmation: value,
-        });
-    }
+  public readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
+  private readonly authService = inject(AuthService);
+  constructor(private readonly modal: ModalService) {}
+
+  handleResetForm(value: boolean) {
+    if (!value) this.authService.loading.set(false);
+    this.modal.modal$.emit({
+      confirmation: value,
+    });
+  }
 }

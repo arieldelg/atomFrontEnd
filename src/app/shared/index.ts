@@ -1,2 +1,1 @@
-export * from "./components/index";
-export * from "./modals/index";
+export * from './modals/index';
