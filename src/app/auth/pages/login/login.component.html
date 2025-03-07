@@ -1,12 +1,6 @@
 <div class="login-page">
   <div class="left-container">
-    <h1>Hello!!</h1>
-    <div class="text-container">
-      <p>Here you can find my links to the Backend repository</p>
-      <a href="https://github.com/arieldelg/atomBackend">click here</a>
-      <p>Here you can find my links to the FrontEnd repository</p>
-      <a href="https://github.com/arieldelg/atomFrontEnd">click here</a>
-    </div>
+    <app-presentation/>
   </div>
   <div class="right-container">
     <h1>Login</h1>
@@ -27,7 +21,7 @@
           <mat-icon matSuffix>face</mat-icon>
         </mat-form-field>
         @if (isValidForm('displayName')) {
-        <span class="warning-text"> User has to be at least 4 characters </span>
+        <span class="warning-text"> {{ getErrors('displayName')}} </span>
         }
       </p>
       <p>
@@ -57,7 +51,7 @@
         </mat-form-field>
         @if (isValidForm('password')) {
         <span class="warning-text">
-          Password needs to be at least 6 characters
+          {{ getErrors('password')  }}
         </span>
         }
       </p>

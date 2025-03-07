@@ -8,10 +8,10 @@ import {
 } from '@angular/forms';
 
 import { AngularMaterialModule } from '../../../core';
-import { ModalService } from '../../services/modal.service';
 import { TaskService } from '../../../tasks/services/task-service.service';
-import { ValidatorsService } from '../../services/validators.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
+import { ValidatorsService } from '../../../tasks/services/validators.service';
+import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-new-task',

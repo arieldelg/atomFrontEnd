@@ -2,8 +2,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { AuthService } from '../../services/auth-service.service';
-import { ModalService } from '../../../core';
 import { filter, Subject, switchMap, takeUntil } from 'rxjs';
+import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-layout-page',
@@ -27,7 +27,7 @@ export class LayoutPageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: ({ ok, resp }) => {
           if (!ok) throw new Error(resp as string);
-          this.authService.loading.set(false);
+
           this.route.navigate(['tasks']);
         },
         error: (err) => console.error('Error:', err),
@@ -37,6 +37,7 @@ export class LayoutPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.authService.loading.set(false);
   }
 
   get loading() {

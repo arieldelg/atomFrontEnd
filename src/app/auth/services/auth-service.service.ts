@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { catchError, from, map, mergeMap, Observable, of } from 'rxjs';
 import {
   Auth,
@@ -53,7 +53,7 @@ export class AuthService {
 
   public emailInUse(credentials: UserCred) {
     this.holdUser.set(credentials);
-    this.loading.set(true);
+
     return this.http
       .get<{ ok: boolean; message: string }>(
         `${environments.baseUrlBackend}/user/verifyEmail/${credentials.email}`

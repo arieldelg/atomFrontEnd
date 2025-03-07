@@ -3,8 +3,8 @@ import { Component, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { AngularMaterialModule } from '../../../core';
-import { ModalService } from '../../services/modal.service';
-import { AuthService } from '../../../auth/services/auth-service.service';
+import { ModalService } from '../../../shared/services/modal.service';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-confirmation',

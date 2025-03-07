@@ -1,0 +1,28 @@
+:host {
+  height: inherit;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: x-large;
+  font-family: monospace;
+}
+
+.custom-text {
+  font-family: monospace;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: medium;
+  text-align: justify;
+  line-height: 20px;
+}
+
+a {
+  color: blue;
+}
+a:hover{
+  text-decoration: underline;
+}

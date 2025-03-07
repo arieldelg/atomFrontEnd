@@ -5,13 +5,13 @@ import { Subject, takeUntil } from 'rxjs';
 import {
   AngularMaterialModule,
   EventEmitterUpdated,
-  ModalService,
   Task,
 } from '../../../core';
-import { NewTaskComponent } from '../../../shared';
 import { TaskCardsComponent } from '../task-cards/task-cards.component';
 import { TaskService } from '../../services/task-service.service';
 import { TaskLoaderComponent } from '../../../shared/components/task-loader/task-loader.component';
+import { ModalService } from '../../../shared/services/modal.service';
+import { NewTaskComponent } from '../../modals/new-task/new-task.component';
 
 @Component({
   selector: 'app-task-section',

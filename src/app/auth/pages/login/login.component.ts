@@ -9,29 +9,28 @@ import { Router } from '@angular/router';
 
 import {
   AngularMaterialModule,
-  ModalService,
-  ValidatorsService,
 } from '../../../core/index';
-import { ConfirmationComponent } from '../../../shared';
 import { AuthService } from '../../services/auth-service.service';
+import { ValidatorsService } from '../../services/validators.service';
+import { ModalService } from '../../../shared/services/modal.service';
+import { PresentationComponent } from "../../components/presentation/presentation.component";
+import { ConfirmationComponent } from '../../modals/confirmation-user/confirmationUser.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [AngularMaterialModule, ReactiveFormsModule],
+  imports: [AngularMaterialModule, ReactiveFormsModule, PresentationComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  public error: boolean = false;
   public message = signal<string>('');
-  public credentialError = signal<string>('');
   public form: FormGroup = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(this.validatorService.emailPattern),
     ]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     displayName: new FormControl('', [
       Validators.minLength(4),
       Validators.required,
@@ -47,6 +46,10 @@ export class LoginComponent implements OnInit {
     this.message.set(this.authService.holdErrorCredentials());
   }
 
+  public getErrors(fieldName: string){
+    return this.validatorService.getErrors(fieldName, this.form)
+  }
+
   public isValidForm(value: string) {
     return (
       this.form.controls[value].errors && this.form.controls[value].touched
@@ -54,12 +57,12 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.credentialError.set('');
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-
+    this.authService.loading.set(true)
     this.authService.emailInUse(this.form.value).subscribe(({ ok }) => {
       if (ok) {
         this.authService.login().subscribe(({ message }) => {
