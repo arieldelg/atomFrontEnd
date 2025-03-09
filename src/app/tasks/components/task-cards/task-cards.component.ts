@@ -1,31 +1,12 @@
 import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
-import {
-  Component,
-  computed,
-  ElementRef,
-  EventEmitter,
-  input,
-  Input,
-  Output,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, EventEmitter, input, Output, signal } from '@angular/core';
 
 import {
   AngularMaterialModule,
   EventEmitterUpdated,
   Task,
 } from '../../../core';
-import {
-  debounceTime,
-  filter,
-  map,
-  Observable,
-  shareReplay,
-  Subject,
-  take,
-  takeLast,
-} from 'rxjs';
+import { debounceTime, Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-task-cards',

@@ -51,6 +51,8 @@ export class TaskSectionComponent implements OnDestroy {
         component: NewTaskComponent,
         disableClose: true,
         id: 'newTask',
+        maxWidth: '500px',
+        width: '90%',
       })
       .subscribe(() => {
         if (!this.modal.dialogStatus()) return;

@@ -19,14 +19,17 @@ export class ModalService {
     disableClose = false,
     payload,
     id,
+    maxWidth,
+    width,
   }: OptionsDialog): Observable<any> {
     const dialogRef = this.dialog.open(component, {
       data: payload ?? null,
       disableClose,
-      width: 'auto',
+      width: width ?? 'auto',
       enterAnimationDuration,
       exitAnimationDuration,
       id,
+      maxWidth,
     });
 
     return dialogRef.afterClosed();
